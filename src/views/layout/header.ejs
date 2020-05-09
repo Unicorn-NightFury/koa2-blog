@@ -8,23 +8,13 @@
 
     <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.0/css/bootstrap.min.css" rel="stylesheet">
     <link href="/css/main.css" rel="stylesheet">
-
+    
     <% if (locals.list) { %>
     <%# 有微博列表，以及右侧面板 %>
     <link href="/css/list.css" rel="stylesheet">
     <link href="/css/right.css" rel="stylesheet">
     <% } %>
 
-    <% if (locals.isNarrow) { %>
-    <%# 窄模式，登录和注册 %>
-    <style>
-        body {
-            width: 400px;
-            margin: 0 auto;
-            margin-top: 100px;
-        }
-    </style>
-    <% } %>
 
     <% if (locals.isNav) { %>
     <%# 有导航%>

@@ -1,10 +1,17 @@
-<%- include('layout/header', { title: '微博 - 登录', isNarrow: true })%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <link rel="stylesheet" href="/css/login.css">
+</head>
+<body>
 
-<h1>登录</h1>
 <% if (locals.isLogin) { %>
     <p><%= locals.userName%> 您已成功登录，请直接访问<a href="/">首页</a></p>
 <% } else { %>
-    <form>
+    <!-- <form>
         <div class="form-group">
             <input type="text" class="form-control" id="input-username" placeholder="请输入用户名">
         </div>
@@ -14,34 +21,132 @@
         <button type="submit" class="btn btn-primary" id="btn-submit">登录</button>
         &nbsp;
         <a href="/register">注册账号>></a>
-    </form>
+    </form> -->
 
-    <script>
-        $(function() {
-            var $inputUserName = $('#input-username')
-            var $inputPassword = $('#input-password')
-            $('#btn-submit').click(function(e) {
-                // 阻止默认的提交表单行为
-                e.preventDefault()
-                const userName = $inputUserName.val()
-                const password = $inputPassword.val()
+    <div class="container">
+        <div class="login-box">
+             <div class="apple-btn login-apple">
+                 <li class="red-btn"></li>
+                 <li class="yellow-btn"></li>
+                 <li class="green-btn"></li>
+             </div>
+             <div class="title">Login</div>
+             <div class="input">
+                 <input type="text" id="input-username" placeholder="Input your username">
+             </div>
+             <div class="input">
+                 <input type="password" id="input-password" placeholder="Input your password">
+             </div>
+             <div class="btn login-btn">
+                 <span id="btn-submit">登录</span>
+             </div>
+             <div class="change-box login-change">
+                 <div class="change-btn toSign">
+                     <a href="/register">去注册</a>
+                 </div>
+             </div>
+        </div>
+     </div>
 
-                // 提交数据
-                ajax.post('/api/user/login', {
-                    userName,
-                    password
-                }, function(err, data) {
-                    if (err) {
-                        alert(err)
-                        return
-                    }
-                    // 跳转到指定 url 或首页
-                    var redirectUrl = $.query.get('url') || '/'
-                    location.href = redirectUrl
-                })
-            })
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js">
+</script>
+<script>
+        /*
+    Logic：
+        主要采用原生 JavaScript，
+        只有在发送 Ajax 请求是才使用 JQuery
+    
+    ===
+    1、登录注册页面的切换逻辑
+
+    2、Ajax发送及接受响应逻辑
+    ===
+*/
+
+
+// 封装选择器, 采用ES6箭头函数写法
+const getSelector = ele => {
+    return typeof ele === "string" ? document.querySelector(ele) : "";
+}
+
+
+// 登录注册载入
+
+const containerShow = () => {
+    var show = getSelector(".container")
+    show.className += " container-show"
+}
+
+
+window.onload = containerShow;
+
+
+// 登录注册页切换
+    // ((window, document) => {
+
+    //     // 登录 -> 注册
+    //     let toSignBtn = getSelector(".toSign"),
+    //         toLoginBtn = getSelector(".toLogin")
+    //         loginBox = getSelector(".login-box"),
+    //         signBox = getSelector(".sign-box");
+        
+    //     // toSignBtn.onclick = () => {
+    //     //     loginBox.className += ' animate_login';
+    //     //     signBox.className += ' animate_sign';
+    //     // }
+
+    //     // toLoginBtn.onclick = () => {
+    //     //     loginBox.classList.remove("animate_login");
+    //     //     signBox.classList.remove("animate_sign");
+    //     // }
+
+
+    // })(window, document);
+
+// Ajax 请求发送
+
+$(function(){
+    var $inputUserName = $('#input-username')
+    var $inputPassword = $('#input-password')
+    $('#btn-submit').click(function() {
+        // 阻止默认的提交表单行为
+
+        const userName = $inputUserName.val()
+        const password = $inputPassword.val()
+
+        // 提交数据
+        // $.post('/api/user/login', {
+        //     userName,
+        //     password
+        // }, function(err, data) {
+        //     if (err) {
+        //         alert(err)
+        //         return
+        //     }
+        //     // 跳转到指定 url 或首页
+            
+        //     var toUrl = $.query.get('url') || '/'
+        //     location.href = toUrl
+        // })
+        axios.post('/api/user/login', {
+            userName,
+            password
         })
-    </script>
+        .then(data => {
+
+            if (data.data.errno !== 0) {
+                alert(data.data.message);
+                return;
+            }
+            window.location.href = '/'
+        })
+    })
+})
+</script>
+
 <% } %>
 
-<%- include('layout/footer')%>
+<!-- <%- include('layout/footer')%> -->
+</body>
+</html>
