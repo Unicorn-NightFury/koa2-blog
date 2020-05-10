@@ -1,0 +1,24 @@
+<%- include('layout/header', { title: '微博 - 首页', isNav: true, isToDo: true})%>
+
+<div class="container">
+    <div class="left">
+        <div class="inputBox">
+            <input type="text" placeholder="点击开始今日的计划吧" id="toDoInput">
+            <span class="inputBoxBottom"></span>
+            <span class="addList">+</span>
+        </div>
+
+        <div class="toDoItem">
+            <span>前端开发</span>
+        </div>
+    </div>  
+    <div class="right">还在开发中，敬请期待...</div>
+</div>
+
+
+<script src="https://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="javascripts/todo.js"></script>
+</body>
+</html>
+

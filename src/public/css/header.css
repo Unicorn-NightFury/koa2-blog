@@ -1,5 +1,8 @@
 .navbar {
     background-color: #20232a !important;
+    position: sticky !important;
+    top: 0px;
+    z-index: 100 !important;
 }
 .navbar-brand {
     color: #61dafb !important;

@@ -129,6 +129,14 @@ router.get('/profile/:userName', loginRedirect, async (ctx, next) => {
     })
 })
 
+// 个人待办清单
+router.get('/to-do', async (ctx, next) => {
+    
+    await ctx.render('todo', {
+        title: '个人待办清单'
+    })
+})
+
 // 广场
 router.get('/square', loginRedirect, async (ctx, next) => {
     // 获取微博数据，第一页
@@ -175,5 +183,7 @@ router.get('/at-me', loginRedirect, async (ctx, next) => {
         await markAsRead(userId)
     }
 })
+
+
 
 module.exports = router

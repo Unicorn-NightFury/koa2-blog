@@ -3,7 +3,7 @@
  * @author Uni
  */
 
-const { Blog, User, UserRelation } = require('../db/model/index')
+const { Blog, User, UserRelation, List } = require('../db/model/index')
 const { formatUser, formatBlog } = require('./_format')
 
 /**
@@ -104,6 +104,7 @@ async function getFollowersBlogList({ userId, pageIndex = 0, pageSize = 10 }) {
         blogList
     }
 }
+
 
 module.exports = {
     createBlog,
