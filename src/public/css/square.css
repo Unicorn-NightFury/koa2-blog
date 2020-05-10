@@ -1,0 +1,5 @@
+.center {
+    margin-top: 30px !important;
+    margin-left: 50% !important;
+    transform: translate(-35%, 0) !important;
+}
